@@ -1,20 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title>Unitoken</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-content class="ion-padding" color="dark">
+  <ion-button fill="clear" class="base">Transferir contas</ion-button><br>
+  <ion-button fill="clear" class="base">Como isso funciona</ion-button><br>
+  <ion-button fill="clear" class="base">Configurações</ion-button><br>
+  <ion-button fill="clear" class="base">Ajuda</ion-button>  
 </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header >
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="escrita">Unitoken</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding" color="dark"> 
+    <ion-button expand="block" class="body">Sem codigos</ion-button><br>
+    <ion-button fill="clear" class="conta">Trocar conta</ion-button>
+</ion-content>
+</div>
