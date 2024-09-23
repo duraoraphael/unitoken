@@ -1,0 +1,7 @@
+{
+  "name": "unitoken",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
