@@ -8,24 +8,9 @@
 .body{
   color: snow;
 }
-.profile-container {
-  position: relative;
-  display: inline-block;
-}
+ion-avatar {
+  --border-radius: 100px;
+  text-align: justify;
 
-.profile-pic {
-  width: 100px; /* Ajuste conforme necessário */
-  height: 100px; /* Ajuste conforme necessário */
-  border-radius: 50%; /* Faz a imagem ser redonda */
-}
-
-.status-indicator {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px; /* Tamanho da bolinha */
-  height: 20px; /* Tamanho da bolinha */
-  background-color: green; /* Cor da bolinha (online) */
-  border-radius: 50%; /* Faz a bolinha ser redonda */
-  border: 2px solid white; /* Borda opcional */
+float: right;
 }
