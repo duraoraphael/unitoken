@@ -2,13 +2,11 @@
   <ion-header>
     <ion-toolbar color="dark">
       <ion-title>Unitoken</ion-title>
-    </ion-toolbar>
+          </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" color="dark">
-  <ion-button fill="clear" class="base">Transferir contas</ion-button><br>
-  <ion-button fill="clear" class="base">Como isso funciona</ion-button><br>
-  <ion-button fill="clear" class="base">Configurações</ion-button><br>
-  <ion-button fill="clear" class="base">Ajuda</ion-button>  
+  <ion-button  [routerLink]="['/configuracao']" routerDirection="forward" fill="clear" class="base">Configurações</ion-button><br>
+  <ion-button [routerLink]="['/ajuda']" routerDirection="forward" fill="clear" class="base">Ajuda</ion-button>  
 </ion-content>
 </ion-menu>
 
@@ -23,6 +21,7 @@
   </ion-header>
   <ion-content class="ion-padding" color="dark"> 
     <ion-button expand="block" class="body">Sem codigos</ion-button><br>
-    <ion-button fill="clear" class="conta">Trocar conta</ion-button>
+    <ion-button fill="clear" class="conta">Trocar conta</ion-button><br>
+    <ion-button [routerLink]="['/cadastro']" routerDirection="forward" fill="clear" class="conta">Fazer login</ion-button>
 </ion-content>
 </div>
