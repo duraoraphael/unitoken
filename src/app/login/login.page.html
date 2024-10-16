@@ -3,16 +3,12 @@
     <ion-button slot="start" color="dark" >
     <ion-back-button></ion-back-button>
     </ion-button>
-    <ion-title>Cadastro</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="email" required></ion-input>
@@ -21,10 +17,16 @@
       <ion-label position="floating">Senha</ion-label>
       <ion-input type="password" required></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Confirmar Senha</ion-label>
-      <ion-input type="password" required></ion-input>
-    </ion-item>
   </ion-list>
-  <ion-button expand="block">Cadastrar</ion-button>
+  <ion-button expand="block">Login</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['/esqueceusenha']" routerDirection="forward" fill="clear" color="primary">Esqueceu Senha</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button [routerLink]="['/cadastro']" routerDirection="forward" fill="clear" color="primary">Cadastro</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

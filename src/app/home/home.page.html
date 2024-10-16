@@ -12,13 +12,13 @@
 
 <div class="ion-page" id="main-content">
   <ion-header >
-    <ion-toolbar color="dark">
+    <ion-toolbar  class="too" color="dark">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
+      <div class="too"> 
       <ion-title class="escrita">Unitoken</ion-title>
-      <div class="icon">
-              <ion-avatar>
+        <ion-avatar class="icon">
         <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
       </ion-avatar>
       </div>
@@ -27,6 +27,6 @@
   <ion-content class="ion-padding" color="dark"> 
     <ion-button expand="block" class="body">Sem codigos</ion-button><br>
     <ion-button fill="clear" class="conta">Trocar conta</ion-button><br>
-    <ion-button [routerLink]="['/cadastro']" routerDirection="forward" fill="clear" class="conta">Fazer login</ion-button>
+    <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear" class="conta">Fazer login</ion-button>
 </ion-content>
 </div>
