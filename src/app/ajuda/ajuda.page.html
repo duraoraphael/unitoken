@@ -1,8 +1,43 @@
-<ion-header >
-  <ion-toolbar color="dark" >
-    <ion-button slot="start" color="dark" >
-    <ion-back-button></ion-back-button>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" color="dark">
+      <ion-back-button></ion-back-button>
     </ion-button>
     <ion-title>Ajuda</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content class="ion-padding" color="dark">
+  <!-- Botões -->
+  <ion-button
+    [routerLink]="['/o-que-e']"
+    routerDirection="forward"
+    expand="block"
+    color="primary"
+    >O que é a Autenticação de Dois Fatores?</ion-button
+  ><br />
+
+  <ion-button
+    [routerLink]="['/comofunciona']"
+    routerDirection="forward"
+    expand="block"
+    color="primary"
+    >Como Funciona a Autenticação de Dois Fatores?</ion-button
+  ><br />
+
+  <ion-button
+    [routerLink]="['/metodo2fa']"
+    routerDirection="forward"
+    expand="block"
+    color="primary"
+    >Exemplos de metodos de 2FA</ion-button
+  ><br />
+
+  <ion-button
+  [routerLink]="['/vantagem']"
+  routerDirection="forward"
+  expand="block"
+  color="primary"
+  >Vantagens da Autenticação de Dois Fatores</ion-button
+><br />
+</ion-content>

@@ -34,6 +34,22 @@ const routes: Routes = [
     path: 'esqueceusenha',
     loadChildren: () => import('./esqueceusenha/esqueceusenha.module').then( m => m.EsqueceusenhaPageModule)
   },
+  {
+    path: 'o-que-e',
+    loadChildren: () => import('./o-que-e/o-que-e.module').then( m => m.OQueEPageModule)
+  },
+  {
+    path: 'comofunciona',
+    loadChildren: () => import('./comofunciona/comofunciona.module').then( m => m.ComofuncionaPageModule)
+  },
+  {
+    path: 'metodo2fa',
+    loadChildren: () => import('./metodo2fa/metodo2fa.module').then( m => m.Metodo2faPageModule)
+  },
+  {
+    path: 'vantagem',
+    loadChildren: () => import('./vantagem/vantagem.module').then( m => m.VantagemPageModule)
+  },
 
 ];
 

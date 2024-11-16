@@ -2,31 +2,55 @@
   <ion-header>
     <ion-toolbar color="dark">
       <ion-title>Unitoken</ion-title>
-          </ion-toolbar>
+    </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" color="dark">
-  <ion-button  [routerLink]="['/configuracao']" routerDirection="forward" fill="clear" class="base">Configurações</ion-button><br>
-  <ion-button [routerLink]="['/ajuda']" routerDirection="forward" fill="clear" class="base">Ajuda</ion-button>  
-</ion-content>
+    <ion-button
+      [routerLink]="['/configuracao']"
+      routerDirection="forward"
+      fill="clear"
+      class="base"
+      >Configurações</ion-button
+    ><br />
+    <ion-button
+      [routerLink]="['/ajuda']"
+      routerDirection="forward"
+      fill="clear"
+      class="base"
+      >Ajuda</ion-button
+    >
+  </ion-content>
 </ion-menu>
 
 <div class="ion-page" id="main-content">
-  <ion-header >
-    <ion-toolbar  class="too" color="dark">
+  <ion-header>
+    <ion-toolbar class="too" color="dark">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <div class="too"> 
-      <ion-title class="escrita">Unitoken</ion-title>
-        <ion-avatar class="icon">
-        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
+      <div class="too">
+        <ion-title class="escrita">Unitoken</ion-title>
+        <ion-chip>
+          <ion-avatar class="icon">
+            <img
+              alt="Silhouette of a person's head"
+              src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            />
+          </ion-avatar>
+          <ion-label>Chip Avatar</ion-label>
+        </ion-chip>
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding" color="dark"> 
-    <ion-button expand="block" class="body">Sem codigos</ion-button><br>
-    <ion-button fill="clear" class="conta">Trocar conta</ion-button><br>
-    <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear" class="conta">Fazer login</ion-button>
-</ion-content>
+  <ion-content class="ion-padding" color="dark">
+    <ion-button expand="block" class="body">Sem codigos</ion-button><br />
+    <ion-button fill="clear" class="conta">Trocar conta</ion-button><br />
+    <ion-button
+      [routerLink]="['/login']"
+      routerDirection="forward"
+      fill="clear"
+      class="conta"
+      >Fazer login</ion-button
+    >
+  </ion-content>
 </div>
