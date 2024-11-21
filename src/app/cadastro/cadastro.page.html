@@ -1,7 +1,7 @@
-<ion-header >
-  <ion-toolbar color="dark" >
-    <ion-button slot="start" color="dark" >
-    <ion-back-button></ion-back-button>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" color="dark">
+      <ion-back-button></ion-back-button>
     </ion-button>
     <ion-title>Cadastro</ion-title>
   </ion-toolbar>
@@ -11,20 +11,20 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input [(ngModel)]="nome" type="text" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" required></ion-input>
+      <ion-input [(ngModel)]="email" type="email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input [(ngModel)]="senha" type="password" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Confirmar Senha</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input [(ngModel)]="confirmarSenha" type="password" required></ion-input>
     </ion-item>
   </ion-list>
-  <ion-button expand="block">Cadastrar</ion-button>
+  <ion-button expand="block" (click)="cadastrar()">Cadastrar</ion-button>
 </ion-content>

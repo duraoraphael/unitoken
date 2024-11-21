@@ -30,20 +30,24 @@
       </ion-buttons>
       <div class="too">
         <ion-title class="escrita">Unitoken</ion-title>
-        <ion-chip>
+        <ion-chip 
+        [routerLink]="['/user-info']"
+        routerDirection="forward"
+        fill="clear">
           <ion-avatar class="icon">
             <img
               alt="Silhouette of a person's head"
               src="https://ionicframework.com/docs/img/demos/avatar.svg"
             />
           </ion-avatar>
-          <ion-label>Chip Avatar</ion-label>
+          <ion-label *ngIf="user$ | async as user">{{ user.nome }}</ion-label>
+          <ion-label *ngIf="!(user$ | async)">Carregando...</ion-label>
         </ion-chip>
       </div>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" color="dark">
-    <ion-button expand="block" class="body">Sem codigos</ion-button><br />
+    <ion-button expand="block" class="body">Sem códigos</ion-button><br />
     <ion-button fill="clear" class="conta">Trocar conta</ion-button><br />
     <ion-button
       [routerLink]="['/login']"

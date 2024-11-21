@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'transfer',
     loadChildren: () => import('./transfer/transfer.module').then( m => m.TransferPageModule)
   },
@@ -50,6 +52,11 @@ const routes: Routes = [
     path: 'vantagem',
     loadChildren: () => import('./vantagem/vantagem.module').then( m => m.VantagemPageModule)
   },
+  {
+    path: 'user-info',
+    loadChildren: () => import('./user-info/user-info.module').then( m => m.UserInfoPageModule)
+  },
+  { path: 'user-info', loadChildren: () => import('./user-info/user-info.module').then(m => m.UserInfoPageModule), canActivate: [AuthGuard] },
 
 ];
 
