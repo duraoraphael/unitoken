@@ -56,7 +56,11 @@ const routes: Routes = [
     path: 'user-info',
     loadChildren: () => import('./user-info/user-info.module').then( m => m.UserInfoPageModule)
   },
-  { path: 'user-info', loadChildren: () => import('./user-info/user-info.module').then(m => m.UserInfoPageModule), canActivate: [AuthGuard] },
+  { path: 'user-info', loadChildren: () => import('./user-info/user-info.module').then(m => m.UserInfoPageModule), canActivate: [AuthGuard] },  {
+    path: 'codigos',
+    loadChildren: () => import('./codigos/codigos.module').then( m => m.CodigosPageModule)
+  },
+
 
 ];
 

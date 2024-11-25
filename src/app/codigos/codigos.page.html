@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gerar Códigos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="dark">
+  <ion-item>
+    <ion-label position="floating">Nome do Código</ion-label>
+    <ion-input [(ngModel)]="nomeCodigo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Chave Secreta</ion-label>
+    <ion-input [(ngModel)]="secret" type="text"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="gerarCodigo()">Gerar Código</ion-button>
+
+  <div *ngIf="codigoGerado">
+    <h2>Código Gerado</h2>
+    <p>{{ codigoGerado }}</p>
+    <ion-button expand="block" (click)="voltarParaHome()">Voltar para Home</ion-button>
+  </div>
+</ion-content>

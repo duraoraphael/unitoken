@@ -5,20 +5,16 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding" color="dark">
-    <ion-button
-      [routerLink]="['/configuracao']"
-      routerDirection="forward"
-      fill="clear"
-      class="base"
-      >Configurações</ion-button
-    ><br />
-    <ion-button
-      [routerLink]="['/ajuda']"
-      routerDirection="forward"
-      fill="clear"
-      class="base"
-      >Ajuda</ion-button
-    >
+    <div class="button-container">
+      <ion-button
+        [routerLink]="['/ajuda']"
+        routerDirection="forward"
+        fill="clear"
+        class="base"
+      >
+        Ajuda
+      </ion-button>
+    </div>
   </ion-content>
 </ion-menu>
 
@@ -30,10 +26,7 @@
       </ion-buttons>
       <div class="too">
         <ion-title class="escrita">Unitoken</ion-title>
-        <ion-chip 
-        [routerLink]="['/user-info']"
-        routerDirection="forward"
-        fill="clear">
+        <ion-chip [routerLink]="['/user-info']" routerDirection="forward" fill="clear">
           <ion-avatar class="icon">
             <img
               alt="Silhouette of a person's head"
@@ -46,15 +39,38 @@
       </div>
     </ion-toolbar>
   </ion-header>
+
   <ion-content class="ion-padding" color="dark">
-    <ion-button expand="block" class="body">Sem códigos</ion-button><br />
-    <ion-button fill="clear" class="conta">Trocar conta</ion-button><br />
-    <ion-button
-      [routerLink]="['/login']"
-      routerDirection="forward"
-      fill="clear"
-      class="conta"
-      >Fazer login</ion-button
-    >
+    <div *ngIf="totpCodes$ | async as codes; else noCodes">
+      <ion-list>
+        <ion-item *ngFor="let code of codes">
+          <ion-label>
+            <h2>{{ code.nome }}</h2>
+            <p>{{ code.codigo }}</p>
+            <p><strong>Código TOTP:</strong> {{ generateTotp(code.secret) }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ng-template #noCodes>
+      <ion-text color="medium">
+        <p class="ion-text-center">Sem códigos</p>
+      </ion-text>
+    </ng-template>
+
+    <div class="button-container">
+      <ion-button fill="clear" class="conta">Trocar conta</ion-button>
+      <br />
+      <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear" class="conta">
+        Fazer login
+      </ion-button>
+    </div>
   </ion-content>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" [routerLink]="['/codigos']" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </div>

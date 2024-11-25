@@ -11,38 +11,35 @@ import { switchMap } from 'rxjs/operators';
 export class AuthService {
   constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {}
 
-  // Método para registrar o usuário com e-mail e senha e salvar no Firestore
+  
   async register(email: string, password: string, nome: string) {
-    const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
-    return this.firestore.collection('usuarios').doc(credential.user?.uid).set({
-      nome: nome,
-      email: email,
-      uid: credential.user?.uid
-    });
+    try {
+      const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      await this.firestore.collection('usuarios').doc(credential.user?.uid).set({
+        nome: nome,
+        email: email,
+        uid: credential.user?.uid
+      });
+    } catch (error) {
+      console.error("Erro ao registrar usuário", error);
+      throw error;
+    }
   }
 
-  // Método para login com e-mail e senha
   login(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  // Método para login com Google
   loginWithGoogle() {
     return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   getUser(): Observable<any> {
-     return this.afAuth.authState.pipe(
-         switchMap(user => {
-             if (user) {
-                 return this.firestore.collection('usuarios').doc(user.uid).valueChanges(); } else {
-                     return of(null); 
-                    } 
-                }) 
-            ); 
-        }
+    return this.afAuth.authState.pipe(
+      switchMap(user => user ? this.firestore.collection('usuarios').doc(user.uid).valueChanges() : of(null))
+    );
+  }
 
-  // Método para logout
   logout() {
     return this.afAuth.signOut();
   }
