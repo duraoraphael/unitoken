@@ -47,18 +47,21 @@
           <ion-label>
             <h2>{{ code.nome }}</h2>
             <p>{{ code.codigo }}</p>
+            <!-- Gerando o código TOTP -->
             <p><strong>Código TOTP:</strong> {{ generateTotp(code.secret) }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </div>
 
+    <!-- Caso não tenha códigos -->
     <ng-template #noCodes>
       <ion-text color="medium">
         <p class="ion-text-center">Sem códigos</p>
       </ion-text>
     </ng-template>
 
+    <!-- Botões de navegação -->
     <div class="button-container">
       <ion-button fill="clear" class="conta">Trocar conta</ion-button>
       <br />
@@ -68,6 +71,7 @@
     </div>
   </ion-content>
 
+  <!-- Botão flutuante para adicionar códigos -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="primary" [routerLink]="['/codigos']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>

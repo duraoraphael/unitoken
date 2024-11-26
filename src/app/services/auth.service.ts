@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import { of, Observable } from 'rxjs'; 
+import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {}
 
-  
   async register(email: string, password: string, nome: string) {
     try {
       const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
       await this.firestore.collection('usuarios').doc(credential.user?.uid).set({
         nome: nome,
         email: email,
-        uid: credential.user?.uid
+        uid: credential.user?.uid,
       });
     } catch (error) {
-      console.error("Erro ao registrar usuário", error);
+      console.error('Erro ao registrar usuário', error);
       throw error;
     }
   }
@@ -36,11 +35,30 @@ export class AuthService {
 
   getUser(): Observable<any> {
     return this.afAuth.authState.pipe(
-      switchMap(user => user ? this.firestore.collection('usuarios').doc(user.uid).valueChanges() : of(null))
+      switchMap((user) =>
+        user ? this.firestore.collection('usuarios').doc(user.uid).valueChanges() : of(null)
+      )
     );
   }
 
   logout() {
     return this.afAuth.signOut();
+  }
+
+  // Método para obter o usuário atual
+  getCurrentUser(): Promise<firebase.User | null> {
+    return this.afAuth.currentUser;
+  }
+
+  // Método para salvar o código TOTP no Firebase
+  async saveTotpCode(uid: string, nome: string, codigo: string, secret: string) {
+    const totpCode = { nome, codigo, secret };
+
+    try {
+      await this.firestore.collection('usuarios').doc(uid).collection('totpCodes').add(totpCode);
+    } catch (error) {
+      console.error('Erro ao salvar código TOTP:', error);
+      throw new Error('Erro ao salvar código TOTP no Firebase');
+    }
   }
 }

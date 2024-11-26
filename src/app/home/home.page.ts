@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap, startWith } from 'rxjs/operators';
-import { authenticator } from '@otplib/preset-browser'; 
+import { switchMap, startWith, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { authenticator } from '@otplib/preset-browser';  // Para gerar o código TOTP
 
 interface TotpCode {
   nome: string;
   codigo: string;
-  secret: string; 
+  secret: string;
 }
 
 @Component({
@@ -18,42 +18,52 @@ interface TotpCode {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  user$: Observable<any> = of(null); 
-  totpCodes$: Observable<TotpCode[]> = of([]); 
+  user$: Observable<any> = of(null);
+  totpCodes$: Observable<TotpCode[]> = of([]);  // Lista dos códigos TOTP
 
   constructor(
     private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
+    private firestore: AngularFirestore,  // Usando AngularFirestore
     private authService: AuthService
   ) {}
 
   ngOnInit() {
-    
-    this.user$ = this.authService.getUser();
-
-    
-    this.loadTotpCodes();
+    this.user$ = this.authService.getUser(); // Obtém os dados do usuário autenticado
+    this.loadTotpCodes();  // Carrega os códigos TOTP ao iniciar
   }
 
   private loadTotpCodes() {
     this.totpCodes$ = this.afAuth.authState.pipe(
-      startWith(null),
+      startWith(null),  // Garante que a autenticação seja inicializada
       switchMap((user) => {
         if (user) {
-          return this.db.list<TotpCode>(`/users/${user.uid}/totpCodes`).valueChanges(); 
+          // Busca os códigos TOTP do Firestore na subcoleção 'totpCodes'
+          return this.firestore
+            .collection('usuarios')
+            .doc(user.uid)
+            .collection('totpCodes')
+            .valueChanges()
+            .pipe(
+              map((totpCodes: any[]) => {
+                // Aqui você mapeia os dados para a interface TotpCode
+                return totpCodes.map((code) => ({
+                  nome: code.nome,
+                  codigo: code.codigo,
+                  secret: code.secret,
+                }));
+              })
+            );
         }
-        return of([]); 
+        return of([]);  // Caso não esteja autenticado, retorna uma lista vazia
       })
     );
   }
 
-  
   generateTotp(secret: string): string {
-    return authenticator.generate(secret); 
+    return authenticator.generate(secret);  // Gera o código TOTP a partir da chave secreta
   }
 
-  
   verifyTotp(secret: string, token: string): boolean {
-    return authenticator.verify({ token, secret });
+    return authenticator.verify({ token, secret });  // Verifica se o código TOTP é válido
   }
 }
