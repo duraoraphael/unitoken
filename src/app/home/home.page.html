@@ -26,16 +26,28 @@
       </ion-buttons>
       <div class="too">
         <ion-title class="escrita">Unitoken</ion-title>
-        <ion-chip [routerLink]="['/user-info']" routerDirection="forward" fill="clear">
-          <ion-avatar class="icon">
-            <img
-              alt="Silhouette of a person's head"
-              src="https://ionicframework.com/docs/img/demos/avatar.svg"
-            />
-          </ion-avatar>
-          <ion-label *ngIf="user$ | async as user">{{ user.nome }}</ion-label>
-          <ion-label *ngIf="!(user$ | async)">Carregando...</ion-label>
-        </ion-chip>
+        
+        <!-- Verifica se o usuário está logado -->
+        <ng-container *ngIf="user$ | async as user; else showLoginButton">
+          <!-- Exibe o avatar e o nome do usuário quando logado -->
+          <ion-item [routerLink]="['/user-info']" routerDirection="forward" lines="none" class="user-item">
+            <ion-avatar slot="start" class="icon">
+              <img
+                alt="Silhouette of a person's head"
+                [src]="user.photoURL || 'https://ionicframework.com/docs/img/demos/avatar.svg'"
+              />
+            </ion-avatar>
+            <ion-label>{{ user.nome }}</ion-label>
+          </ion-item>
+        </ng-container>
+
+        <!-- Caso não tenha usuário, exibe o botão de login -->
+        <ng-template #showLoginButton>
+          <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear">
+            Fazer login
+          </ion-button>
+        </ng-template>
+
       </div>
     </ion-toolbar>
   </ion-header>
@@ -47,31 +59,19 @@
           <ion-label>
             <h2>{{ code.nome }}</h2>
             <p>{{ code.codigo }}</p>
-            <!-- Gerando o código TOTP -->
             <p><strong>Código TOTP:</strong> {{ generateTotp(code.secret) }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </div>
 
-    <!-- Caso não tenha códigos -->
     <ng-template #noCodes>
       <ion-text color="medium">
         <p class="ion-text-center">Sem códigos</p>
       </ion-text>
     </ng-template>
-
-    <!-- Botões de navegação -->
-    <div class="button-container">
-      <ion-button fill="clear" class="conta">Trocar conta</ion-button>
-      <br />
-      <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear" class="conta">
-        Fazer login
-      </ion-button>
-    </div>
   </ion-content>
 
-  <!-- Botão flutuante para adicionar códigos -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="primary" [routerLink]="['/codigos']" routerDirection="forward">
       <ion-icon name="add"></ion-icon>
