@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router'; // Importe o Router
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-cadastro',
@@ -35,7 +35,6 @@ export class CadastroPage {
       });
       await toast.present();
 
-      // Redirecione para a página de login
       this.router.navigate(['/login']);
     }).catch(async (error) => {
       const toast = await this.toastCtrl.create({

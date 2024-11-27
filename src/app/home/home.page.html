@@ -20,16 +20,13 @@
 
 <div class="ion-page" id="main-content">
   <ion-header>
-    <ion-toolbar class="too" color="dark">
+    <ion-toolbar color="dark">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <div class="too">
-        <ion-title class="escrita">Unitoken</ion-title>
-        
-        <!-- Verifica se o usuário está logado -->
+      <ion-title class="escrita">Unitoken</ion-title>
+      <div class="user-info" slot="end">
         <ng-container *ngIf="user$ | async as user; else showLoginButton">
-          <!-- Exibe o avatar e o nome do usuário quando logado -->
           <ion-item [routerLink]="['/user-info']" routerDirection="forward" lines="none" class="user-item">
             <ion-avatar slot="start" class="icon">
               <img
@@ -41,40 +38,50 @@
           </ion-item>
         </ng-container>
 
-        <!-- Caso não tenha usuário, exibe o botão de login -->
         <ng-template #showLoginButton>
           <ion-button [routerLink]="['/login']" routerDirection="forward" fill="clear">
             Fazer login
           </ion-button>
         </ng-template>
-
       </div>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding" color="dark">
-    <div *ngIf="totpCodes$ | async as codes; else noCodes">
-      <ion-list>
-        <ion-item *ngFor="let code of codes">
-          <ion-label>
-            <h2>{{ code.nome }}</h2>
-            <p>{{ code.codigo }}</p>
-            <p><strong>Código TOTP:</strong> {{ generateTotp(code.secret) }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
+    <!-- Verifica se o usuário está logado e possui códigos TOTP -->
+    <ng-container *ngIf="user$ | async as user; else showWelcomeMessage">
+      <div *ngIf="totpCodes$ | async as codes; else noCodes">
+        <ion-list>
+          <ion-item *ngFor="let code of codes">
+            <ion-label>
+              <h2>{{ code.nome }}</h2>
+              <p><strong>Código TOTP:</strong> {{ code.codigo }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      
+      <ng-template #noCodes>
+        <ion-text color="medium">
+          <p class="ion-text-center">Sem códigos</p>
+        </ion-text>
+      </ng-template>
 
-    <ng-template #noCodes>
+      <!-- Exibe o botão para gerar novos códigos, se o usuário estiver logado -->
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="primary" [routerLink]="['/codigos']" routerDirection="forward">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ng-container>
+
+    <!-- Caso o usuário não esteja logado, exibe a mensagem de boas-vindas -->
+    <ng-template #showWelcomeMessage>
       <ion-text color="medium">
-        <p class="ion-text-center">Sem códigos</p>
+        <p class="ion-text-center">
+          Bem-Vindo ao Unitoken, faça login para começar a gerar seus códigos.
+        </p>
       </ion-text>
     </ng-template>
   </ion-content>
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button color="primary" [routerLink]="['/codigos']" routerDirection="forward">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </div>

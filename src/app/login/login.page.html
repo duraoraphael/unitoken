@@ -1,32 +1,33 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="start" color="dark">
-      <ion-back-button></ion-back-button>
-    </ion-button>
-    <ion-title>Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input [(ngModel)]="email" type="email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input [(ngModel)]="senha" type="password" required></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="block" (click)="login()">Login</ion-button>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/esqueceusenha']" routerDirection="forward" fill="clear" color="primary">Esqueceu Senha</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button [routerLink]="['/cadastro']" routerDirection="forward" fill="clear" color="primary">Cadastro</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content color="dark">
+  <div class="login-container">
+    <h1 class="title">Faça login na sua conta</h1>
+    <ion-list>
+      <ion-item class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email" type="email" required></ion-input>
+      </ion-item>
+      <ion-item class="input-item">
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input [(ngModel)]="senha" type="password" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="login()" class="login-button">Login</ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button [routerLink]="['/cadastro']" routerDirection="forward" fill="clear" color="primary" class="cad-button">Cadastro</ion-button>
+        </ion-col>
+        <h3 class="cad">Não tem conta? Cadastre-se aqui!</h3>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

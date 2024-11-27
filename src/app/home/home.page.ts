@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription, timer } from 'rxjs';
 import { switchMap, startWith, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { authenticator } from '@otplib/preset-browser';  // Para gerar o código TOTP
+import { authenticator } from '@otplib/preset-browser'; 
 
 interface TotpCode {
   nome: string;
-  codigo: string;
   secret: string;
+  codigo?: string; 
 }
 
 @Component({
@@ -17,27 +17,33 @@ interface TotpCode {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   user$: Observable<any> = of(null);
-  totpCodes$: Observable<TotpCode[]> = of([]);  // Lista dos códigos TOTP
+  totpCodes$: Observable<TotpCode[]> = of([]); 
+  private intervalSubscription?: Subscription; 
 
   constructor(
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore,  // Usando AngularFirestore
+    private firestore: AngularFirestore,
     private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.user$ = this.authService.getUser(); // Obtém os dados do usuário autenticado
-    this.loadTotpCodes();  // Carrega os códigos TOTP ao iniciar
+    
+    this.user$ = this.authService.getUser();
+    this.loadTotpCodes();
+
+    
+    this.intervalSubscription = timer(0, 30000).subscribe(() => {
+      this.updateTotpCodes();
+    });
   }
 
   private loadTotpCodes() {
     this.totpCodes$ = this.afAuth.authState.pipe(
-      startWith(null),  // Garante que a autenticação seja inicializada
+      startWith(null),
       switchMap((user) => {
         if (user) {
-          // Busca os códigos TOTP do Firestore na subcoleção 'totpCodes'
           return this.firestore
             .collection('usuarios')
             .doc(user.uid)
@@ -45,25 +51,34 @@ export class HomePage implements OnInit {
             .valueChanges()
             .pipe(
               map((totpCodes: any[]) => {
-                // Aqui você mapeia os dados para a interface TotpCode
                 return totpCodes.map((code) => ({
                   nome: code.nome,
-                  codigo: code.codigo,
                   secret: code.secret,
+                  codigo: this.generateTotp(code.secret), 
                 }));
               })
             );
         }
-        return of([]);  // Caso não esteja autenticado, retorna uma lista vazia
+        return of([]);
       })
     );
   }
 
-  generateTotp(secret: string): string {
-    return authenticator.generate(secret);  // Gera o código TOTP a partir da chave secreta
+  private updateTotpCodes() {
+    this.totpCodes$ = this.totpCodes$.pipe(
+      map((codes) =>
+        codes.map((code) => ({
+          ...code,
+          codigo: this.generateTotp(code.secret), 
+        }))
+      )
+    );
   }
 
-  verifyTotp(secret: string, token: string): boolean {
-    return authenticator.verify({ token, secret });  // Verifica se o código TOTP é válido
+  generateTotp(secret: string): string {
+    return authenticator.generate(secret); 
+  }
+  ngOnDestroy() {
+    this.intervalSubscription?.unsubscribe();
   }
 }

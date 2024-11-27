@@ -1,9 +1,49 @@
-.title{
-    text-align: center;
+/* Definições de variáveis para cores e estilos */
+$primary-color: #4a90e2;
+$secondary-color: #50e3c2;
+$background-color: #1c1c1e;
+$header-background-color: #282828;
+$text-color: #f5f5f5;
+$button-background-color: rgba(255, 255, 255, 0.1);
+$button-hover-color: rgba(255, 255, 255, 0.2);
+$border-radius: 8px;
+
+ion-header, ion-toolbar {
+  background-color: $header-background-color;
+  color: $text-color;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.sub{
-    display: flex;
-    width: 90%;
-    text-align: justify;
-    margin-left: 30px;
+
+ion-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+ion-content {
+  --background: $background-color;
+  color: $text-color;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+}
+
+.content-wrapper {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: $primary-color;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sub {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }

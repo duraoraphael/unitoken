@@ -1,46 +1,34 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-button slot="start" color="dark">
-      <ion-back-button></ion-back-button>
-    </ion-button>
-    <ion-title>Unitoken</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/ajuda"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Unitoken</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content color="dark">
-  <br />
-  <h1 class="title">Como Funciona a Autenticação de Dois Fatores?</h1>
-  <br />
+  <div class="content-wrapper">
+    <h1 class="title">Como Funciona a Autenticação de Dois Fatores?</h1>
 
-  <h3 class="sub">O processo de 2FA geralmente envolve os seguintes passos:</h3>
-  <br />
+    <h3 class="sub">O processo de 2FA geralmente envolve os seguintes passos:</h3>
 
-  <h1 class="sub">
-    1. Login com a Senha (Primeiro Fator): Quando você tenta acessar sua conta,
-    o primeiro passo é inserir sua senha, como de costume.
-  </h1>
-  <br />
+    <h1 class="sub">
+      1. Login com a Senha (Primeiro Fator): Quando você tenta acessar sua conta, o primeiro passo é inserir sua senha, como de costume.
+    </h1>
 
-  <h1 class="sub">
-    2. Verificação com um Segundo Fator (Segundo Fator): Após digitar sua senha
-    corretamente, o sistema pedirá um segundo fator para confirmar sua
-    identidade. Isso pode acontecer de várias formas:<br /><br />
+    <h1 class="sub">
+      2. Verificação com um Segundo Fator (Segundo Fator): Após digitar sua senha corretamente, o sistema pedirá um segundo fator para confirmar sua identidade. Isso pode acontecer de várias formas:
+      <br /><br />
+      ° Código de verificação via SMS: Um código único e temporário é enviado para seu celular. Você deve digitar esse código para concluir o login.
+      <br /><br />
+      ° Código gerado por aplicativo de autenticação: Usando um aplicativo como Google Authenticator ou Authy, um código temporário é gerado em seu dispositivo. Esse código muda a cada 30 segundos e é usado para finalizar o login.
+      <br /><br />
+      ° Notificação de confirmação (Push): Algumas plataformas enviam uma notificação para seu celular, onde você pode simplesmente aprovar ou negar a tentativa de login.
+    </h1>
 
-    °Código de verificação via SMS: Um código único e temporário é enviado para
-    seu celular. Você deve digitar esse código para concluir o login.<br /><br />
-
-    Código gerado por aplicativo de autenticação: Usando um aplicativo como
-    Google Authenticator ou Authy, um código temporário é gerado em seu
-    dispositivo. Esse código muda a cada 30 segundos e é usado para finalizar o
-    login.<br /><br />
-
-    Notificação de confirmação (Push): Algumas plataformas enviam uma
-    notificação para seu celular, onde você pode simplesmente aprovar ou negar a
-    tentativa de login.<br /><br />
-  </h1>
-  <br/>
-
-  <h1>
-   3. Acesso Concluído: Se o segundo fator for validado corretamente, você será
-    autenticado e terá acesso à sua conta.
-  </h1>
+    <h1 class="sub">
+      3. Acesso Concluído: Se o segundo fator for validado corretamente, você será autenticado e terá acesso à sua conta.
+    </h1>
+  </div>
 </ion-content>

@@ -22,18 +22,16 @@ export class CodigosPage implements OnInit {
 
   ngOnInit() {}
 
-  // Método para gerar e salvar código TOTP
   async gerarCodigo() {
     if (this.secret && this.nomeCodigo) {
-      const codigoGerado = authenticator.generate(this.secret); // Geração do código
+      const codigoGerado = authenticator.generate(this.secret); 
 
       try {
-        const user = await this.authService.getCurrentUser(); // Obtém o usuário autenticado
+        const user = await this.authService.getCurrentUser(); 
         if (user && user.uid) {
-          // Chama o método do AuthService para salvar o código
           await this.authService.saveTotpCode(user.uid, this.nomeCodigo, codigoGerado, this.secret);
           console.log('Código TOTP salvo com sucesso!');
-          this.navController.navigateBack('/home'); // Redireciona para a home após salvar
+          this.navController.navigateBack('/home'); 
         } else {
           console.error('Usuário não autenticado.');
         }

@@ -1,0 +1,65 @@
+
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50e3c2;
+    --background-color: #1c1c1e;
+    --text-color: #f5f5f5;
+    --button-background-color: rgba(255, 255, 255, 0.1);
+    --button-hover-color: rgba(255, 255, 255, 0.2);
+    --border-radius: 8px;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  ion-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  ion-content {
+    --background: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+  }
+  
+  .content-wrapper {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .help-button {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+  }
+  
+  .help-button:hover {
+    background-color: var(--button-hover-color);
+  }
+  
